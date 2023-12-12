@@ -1,5 +1,5 @@
 const StoryDetail = (props) => {
-  return <div></div>;
+  return <div>{props.storyText}</div>;
 };
 
 export default StoryDetail;

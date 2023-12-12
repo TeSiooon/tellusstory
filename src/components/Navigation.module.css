@@ -1,0 +1,21 @@
+.menu__link {
+  line-height: 2;
+  position: relative;
+  color: white;
+}
+
+.menu__link::before {
+  content: "";
+  width: 0;
+  height: 2px;
+  border-radius: 2px;
+  background-color: #faf9f9;
+  position: absolute;
+  bottom: -0.25rem;
+  left: 0;
+  transition: width 0.4s;
+}
+
+.menu__link:hover::before {
+  width: 100%;
+}

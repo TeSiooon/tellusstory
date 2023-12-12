@@ -16,13 +16,23 @@ const Navigation = (props) => {
             Poczekalnia
           </Link>
         </li>
-        <li>
-          {/* <SignIn /> */}
-          <Link className={styles.menu__link} href="/">
+        {/* <li>
+          <Link className={styles.menu__link} href="/auth/signin">
             Zaloguj
           </Link>
         </li>
+        <li>
+          <Link className={styles.menu__link} href="/auth/signup">
+            Zarejestruj
+          </Link>
+        </li> */}
         {/* <button className=" text-white">Wyloguj</button> */}
+        {/* Jesli jest zalogowany wyswietla link do formularza */}
+        <li>
+          <Link className={styles.menu__link} href="/new-story">
+            Dodaj
+          </Link>
+        </li>
       </ul>
     </nav>
   );

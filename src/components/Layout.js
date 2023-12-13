@@ -2,10 +2,12 @@ import Navigation from "./Navigation";
 
 const Layout = (props) => {
   return (
-    <div>
+    <>
       <Navigation />
-      <main>{props.children}</main>
-    </div>
+      <main className="flex items-center justify-center h-screen">
+        {props.children}
+      </main>
+    </>
   );
 };
 

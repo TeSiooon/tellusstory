@@ -12,25 +12,28 @@ const NewStory = (props) => {
     const storyData = {
       storyText,
       date: today,
+      comments: [],
     };
 
     props.onAddStory(storyData);
   };
 
   return (
-    <div>
-      <form onSubmit={submitHandler}>
+    <div className="w-1/2 flex flex-col justify-center items-center">
+      <p className="text-2xl my-2">Share your story with us</p>
+      <form onSubmit={submitHandler} className="flex flex-col w-full">
         <div>
-          <label></label>
-          <input
-            type="textarea"
+          <textarea
+            className="w-full"
+            type="text"
             required
+            rows="15"
             id="storyText"
             ref={storyTextInputRef}
           />
         </div>
-        <div>
-          <button>Add story</button>
+        <div className="relative">
+          <button className="absolute inset-y-0 right-0">Add story</button>
         </div>
       </form>
     </div>

@@ -13,11 +13,7 @@ const index = (props) => {
     const data = await response.json();
   };
 
-  return (
-    <div>
-      <NewStory onAddStory={addStoryHandler} />
-    </div>
-  );
+  return <NewStory onAddStory={addStoryHandler} />;
 };
 
 export default index;

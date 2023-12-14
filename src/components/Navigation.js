@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./Navigation.module.css";
+import { signIn } from "next-auth/react";
 
 const Navigation = (props) => {
   return (
@@ -16,15 +17,15 @@ const Navigation = (props) => {
             Poczekalnia
           </Link>
         </li>
-        {/* <li>
-          <Link className={styles.menu__link} href="/auth/signin">
-            Zaloguj
-          </Link>
-        </li>
         <li>
-          <Link className={styles.menu__link} href="/auth/signup">
+          <button className={styles.menu__link} onClick={signIn}>
+            Login
+          </button>
+        </li>
+        {/* <li>
+          <butt className={styles.menu__link} href="/auth/signup">
             Zarejestruj
-          </Link>
+          </butt>
         </li> */}
         {/* <button className=" text-white">Wyloguj</button> */}
         {/* Jesli jest zalogowany wyswietla link do formularza */}

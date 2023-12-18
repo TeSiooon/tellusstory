@@ -9,12 +9,13 @@ const index = (props) => {
     password: "",
   });
 
-  const loginUser = async (e) => {
+  const loginUserHandler = async (e) => {
     e.preventDefault();
-    signIn("credentials", {
+    const response = await signIn("credentials", {
       ...data,
       redirect: false,
     });
+    console.log(response);
     router.push("/");
   };
   return (
@@ -27,7 +28,7 @@ const index = (props) => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" onSubmit={loginUser}>
+          <form className="space-y-6" onSubmit={loginUserHandler}>
             <div>
               <label
                 htmlFor="email"
@@ -81,6 +82,11 @@ const index = (props) => {
               >
                 Login
               </button>
+            </div>
+            <div>
+              <p className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                Register
+              </p>
             </div>
           </form>
         </div>

@@ -27,12 +27,14 @@ export async function getServerSideProps() {
   const storiesCollection = db.collection("stories");
 
   const data = await storiesCollection.find().toArray();
+  const sortedResults = data.sort((a, b) => b.date - a.date);
+  console.log(sortedResults);
 
   client.close();
 
   return {
     props: {
-      stories: data.map((story) => ({
+      stories: sortedResults.map((story) => ({
         id: story._id.toString(),
         storyText: story.storyText,
       })),

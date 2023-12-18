@@ -16,7 +16,7 @@ async function handler(req, res) {
     email: email,
   });
   if (exist) {
-    console.log("exists");
+    // console.log("exists");
     return new Error({ status: 400 }, { message: "User already exists" });
   }
 
@@ -25,7 +25,7 @@ async function handler(req, res) {
     email,
     hashedPassword,
   });
-  console.log(result);
+  // console.log(result);
   client.close();
 }
 export default handler;

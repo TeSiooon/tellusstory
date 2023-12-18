@@ -1,10 +1,12 @@
 import Link from "next/link";
 import styles from "./Navigation.module.css";
-import { signIn } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const Navigation = (props) => {
+  const { data: session, status } = useSession();
+  console.log(session);
   return (
-    <nav className="flex h-12 px-8 bg-gray-900">
+    <nav className="flex h-2/6 px-8 bg-[#D8C3A5]">
       <p className={`flex items-center w-40 text-white`}>TELL ME STORY</p>
       <ul className="flex flex-row w-full items-center justify-end space-x-8">
         <li>
@@ -18,22 +20,29 @@ const Navigation = (props) => {
           </Link>
         </li>
         <li>
-          <button className={styles.menu__link} onClick={signIn}>
-            Login
-          </button>
+          {status === "unauthenticated" && (
+            <button className={styles.menu__link} onClick={signIn}>
+              Login
+            </button>
+          )}
+          {status === "authenticated" && (
+            <button className={styles.menu__link} onClick={signOut}>
+              Sing out{" "}
+              <span className="font-bold text-[#E98074]">
+                ({session.user.name})
+              </span>
+            </button>
+          )}
         </li>
-        {/* <li>
-          <butt className={styles.menu__link} href="/auth/signup">
-            Zarejestruj
-          </butt>
-        </li> */}
-        {/* <button className=" text-white">Wyloguj</button> */}
+
         {/* Jesli jest zalogowany wyswietla link do formularza */}
-        <li>
-          <Link className={styles.menu__link} href="/new-story">
-            Dodaj
-          </Link>
-        </li>
+        {status === "authenticated" && (
+          <li>
+            <Link className={styles.menu__link} href="/new-story">
+              Dodaj
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   );

@@ -33,7 +33,7 @@ const NewStory = (props) => {
           />
         </div>
         <div className="relative">
-          <button className="absolute inset-y-0 right-0">Add story</button>
+          <button className=" rounded-md bg-slate-500">Add story</button>
         </div>
       </form>
     </div>

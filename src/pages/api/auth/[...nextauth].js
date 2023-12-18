@@ -21,18 +21,18 @@ export default NextAuth({
         const usersCollection = db.collection("users");
 
         const user = await usersCollection.findOne({
-          email: email,
+          email: cretendials.email,
         });
 
         if (!user) {
-          return null;
+          throw new Error("User does not exists");
         }
         const passwordMatch = await bcrypt.compare(
           cretendials.password,
           user.hashedPassword
         );
         if (!passwordMatch) {
-          return null;
+          throw new Error("Wrong password");
         }
 
         return user;
@@ -46,4 +46,18 @@ export default NextAuth({
   pages: {
     signIn: "/auth/signin",
   },
+  // callbacks: {
+  //   async session({ session, user, token }) {
+  //     if (token.user) {
+  //       session.user = { ...token.user };
+  //     }
+  //     return session;
+  //   },
+  //   async jwt({ token, user, account, profile }) {
+  //     if (user) {
+  //       token.user = { ...user };
+  //     }
+  //     return token;
+  //   },
+  // },
 });

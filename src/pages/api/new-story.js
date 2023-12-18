@@ -11,7 +11,7 @@ async function handler(req, res) {
     const storiesCollection = db.collection("stories");
 
     const result = await storiesCollection.insertOne(data);
-    console.log(result);
+    // console.log(result);
 
     client.close();
 

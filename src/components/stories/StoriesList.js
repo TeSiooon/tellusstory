@@ -1,7 +1,7 @@
 import StoryDetail from "./StoryDetail";
 
 const StoriesList = (props) => {
-  console.log(props.stories);
+  // console.log(props.stories);
   return (
     <div>
       <ul className="flex flex-col justify-center items-center">

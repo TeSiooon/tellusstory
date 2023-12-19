@@ -4,10 +4,10 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 const Navigation = (props) => {
   const { data: session, status } = useSession();
-  console.log(session);
+  // console.log(session);
   return (
-    <nav className="flex h-2/6 px-8 bg-[#D8C3A5]">
-      <p className={`flex items-center w-40 text-white`}>TELL ME STORY</p>
+    <nav className="flex h-2/6 px-8 border-b-4 border-[#E98074]">
+      <p className={`flex items-center w-40 text-black`}>TELL ME STORY</p>
       <ul className="flex flex-row w-full items-center justify-end space-x-8">
         <li>
           <Link className={styles.menu__link} href="/">

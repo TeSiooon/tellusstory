@@ -28,7 +28,7 @@ export async function getServerSideProps() {
 
   const data = await storiesCollection.find().toArray();
   const sortedResults = data.sort((a, b) => b.date - a.date);
-  console.log(sortedResults);
+  // console.log(sortedResults);
 
   client.close();
 

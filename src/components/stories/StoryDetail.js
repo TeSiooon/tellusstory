@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import CommentsList from "../comments/CommentsList";
 import NewComment from "../comments/NewComment";
+import { AnimatePresence, motion } from "framer-motion";
 
 const StoryDetail = (props) => {
   const displayedId = props.id.slice(-6);
@@ -28,13 +29,30 @@ const StoryDetail = (props) => {
 
       <div className="w-full">
         Comments ({props.comments.length})
-        <button onClick={toggleCommentsVisibility}>&#9650;</button>
-        {commentsVisible && (
-          <div>
-            <CommentsList comments={props.comments} />{" "}
-            <NewComment storyId={props.id} />
-          </div>
-        )}
+        <motion.button
+          animate={{ rotate: commentsVisible ? 180 : 0 }}
+          onClick={toggleCommentsVisibility}
+        >
+          &#9650;
+        </motion.button>
+        <AnimatePresence>
+          {commentsVisible && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+            >
+              <CommentsList comments={props.comments} />
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                <NewComment storyId={props.id} />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

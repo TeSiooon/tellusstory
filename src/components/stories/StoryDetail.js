@@ -2,6 +2,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 import CommentsList from "../comments/CommentsList";
+import NewComment from "../comments/NewComment";
 
 const StoryDetail = (props) => {
   const displayedId = props.id.slice(-6);
@@ -28,7 +29,12 @@ const StoryDetail = (props) => {
       <div className="w-full">
         Comments ({props.comments.length})
         <button onClick={toggleCommentsVisibility}>&#9650;</button>
-        {commentsVisible && <CommentsList comments={props.comments} />}
+        {commentsVisible && (
+          <div>
+            <CommentsList comments={props.comments} />{" "}
+            <NewComment storyId={props.id} />
+          </div>
+        )}
       </div>
     </div>
   );

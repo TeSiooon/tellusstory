@@ -4,7 +4,7 @@ const CommentsList = (props) => {
     <div className="bg-red-600">
       <ul>
         {props.comments.map((comment) => (
-          <li>
+          <li key={comment.id}>
             <p>Author</p>
             {comment.text}
           </li>

@@ -25,23 +25,19 @@ export async function getServerSideProps() {
 
   const db = client.db("storiesDB");
   const storiesCollection = db.collection("stories");
-
-  const data = await storiesCollection.find().toArray();
-  const sortedResults = data
-    .filter((story) => story.date)
-    .sort((a, b) => b.date - a.date);
-  // console.log("Filtered and sorted stories", sortedResults);
+  const data = await storiesCollection.find().sort({ date: -1 }).toArray();
+  console.log("Filtered and sorted stories", data);
 
   const commentsCollection = db.collection("comments");
 
   const storiesWithComments = await Promise.all(
-    sortedResults.map(async (story) => {
+    data.map(async (story) => {
       const commentsData = await commentsCollection
         .find({
           storyId: story._id.toString(),
         })
         .toArray();
-      console.log(`Comments for Story ${story._id}:`, commentsData);
+      // console.log(`Comments for Story ${story._id}:`, commentsData);
       return {
         id: story._id.toString(),
         storyText: story.storyText,
@@ -54,7 +50,7 @@ export async function getServerSideProps() {
       };
     })
   );
-  console.log(storiesWithComments[0]);
+  // console.log(storiesWithComments[0]);
 
   client.close();
 

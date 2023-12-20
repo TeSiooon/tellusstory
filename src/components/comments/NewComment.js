@@ -4,9 +4,10 @@ import { useRef } from "react";
 const NewComment = (props) => {
   const commentTextRef = useRef();
   const storyId = props.storyId;
+  // console.log("current story", storyId);
   const { data: session, status } = useSession();
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     const commentText = commentTextRef.current.value;
     const today = new Date();
@@ -18,6 +19,14 @@ const NewComment = (props) => {
       date: today,
     };
     console.log(commentData);
+    const response = await fetch("/api/new-comment", {
+      method: "POST",
+      body: JSON.stringify(commentData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
   };
   return (
     <div className="w-1/2 flex flex-col justify-center items-center">

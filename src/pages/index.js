@@ -26,7 +26,7 @@ export async function getServerSideProps() {
   const db = client.db("storiesDB");
   const storiesCollection = db.collection("stories");
   const data = await storiesCollection.find().sort({ date: -1 }).toArray();
-  console.log("Filtered and sorted stories", data);
+  // console.log("Filtered and sorted stories", data);
 
   const commentsCollection = db.collection("comments");
 

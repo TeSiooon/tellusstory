@@ -1,7 +1,7 @@
 const CommentsList = (props) => {
   console.log(props.comments);
   return (
-    <div className="flex flex-col">
+    <div className="bg-red-600 ">
       <ul>
         {props.comments.map((comment) => (
           <li>

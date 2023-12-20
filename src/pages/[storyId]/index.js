@@ -7,10 +7,20 @@ const index = (props) => {
   console.log("test komentarzy");
   console.log(props.comments);
   return (
-    <div>
-      <Story storyText={props.story.storyText} />
-      <CommentsList comments={props.comments} />
-      {/* <NewComment /> */}
+    <div className="flex flex-col w-2/4 justify-center items-center bg-orange-800 my-8">
+      <div className="flex w-full bg-slate-600 px-8">
+        <p className="w-1/2">Autor</p>
+      </div>
+      <div className="bg-red-200">
+        <p>{props.story.storyText}</p>
+      </div>
+
+      <div className="w-full bg-green-200">
+        Comments
+        <div>
+          <CommentsList comments={props.comments} />
+        </div>
+      </div>
     </div>
   );
 };

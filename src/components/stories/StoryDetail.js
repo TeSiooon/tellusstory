@@ -6,7 +6,7 @@ const StoryDetail = (props) => {
   // console.log(displayedId);
   const { data: session, status } = useSession();
   return (
-    <div className="flex flex-col justify-center items-center w-3/4 bg-orange-800 my-8">
+    <div className="flex flex-col justify-center items-center w-full bg-orange-800 my-8">
       <div className="flex w-full bg-slate-600 px-8">
         <p className="w-1/2">Autor</p>
         <Link href={`/${props.id}`} className="w-1/2 text-right">

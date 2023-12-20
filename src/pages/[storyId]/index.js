@@ -16,7 +16,7 @@ const index = (props) => {
       </div>
 
       <div className="w-full bg-green-200">
-        Comments
+        Comments ({props.comments.length})
         <div>
           <CommentsList comments={props.comments} />
         </div>

@@ -14,7 +14,7 @@ export default function Home(props) {
         <title>Tell Us Story</title>
         <meta name="TUS" description="Browse stories around the world" />
       </Head>
-      <StoriesList stories={props.stories} />
+      <StoriesList stories={props.storiesWithComments} />
     </Fragment>
   );
 }
@@ -27,63 +27,44 @@ export async function getServerSideProps() {
   const storiesCollection = db.collection("stories");
 
   const data = await storiesCollection.find().toArray();
-  const sortedResults = data.sort((a, b) => b.date - a.date);
-  // console.log(sortedResults);
+  const sortedResults = data
+    .filter((story) => story.date)
+    .sort((a, b) => b.date - a.date);
+  // console.log("Filtered and sorted stories", sortedResults);
 
   const commentsCollection = db.collection("comments");
-  const commentsData = await commentsCollection
-    .find({ storyId: data[0]._id.toString() })
-    .toArray();
-  console.log(commentsData);
-  client.close();
 
-  return {
-    props: {
-      stories: sortedResults.map((story) => ({
+  const storiesWithComments = await Promise.all(
+    sortedResults.map(async (story) => {
+      const commentsData = await commentsCollection
+        .find({
+          storyId: story._id.toString(),
+        })
+        .toArray();
+      console.log(`Comments for Story ${story._id}:`, commentsData);
+      return {
         id: story._id.toString(),
         storyText: story.storyText,
-      })),
-    },
-  };
+        comments: commentsData
+          ? commentsData.map((comment) => ({
+              id: comment._id.toString(),
+              text: comment.commentText,
+            }))
+          : [],
+      };
+    })
+  );
+  console.log(storiesWithComments[0]);
+
+  client.close();
+
+  // return {
+  //   props: {
+  //     stories: sortedResults.map((story) => ({
+  //       id: story._id.toString(),
+  //       storyText: story.storyText,
+  //     })),
+  //   },
+  // };
+  return { props: { storiesWithComments } };
 }
-
-// export async function getServerSideProps() {
-//   require("dotenv").config();
-//   const client = await MongoClient.connect(process.env.DATABASE_URL);
-
-//   const db = client.db("storiesDB");
-//   const storiesCollection = db.collection("stories");
-
-//   const data = await storiesCollection.find().toArray();
-//   const sortedResults = data.sort((a, b) => b.date - a.date);
-
-//   // Pobieranie komentarzy dla każdej historii
-//   const commentsCollection = db.collection("comments");
-
-//   const storiesWithComments = await Promise.all(
-//     sortedResults.map(async (story) => {
-//       const commentsData = await commentsCollection
-//         .find({ storyId: story._id.toString() })
-//         .toArray();
-//       return {
-//         id: story._id.toString(),
-//         storyText: story.storyText,
-//         comments: commentsData
-//           ? commentsData.map((comment) => ({
-//               // id: comment._id.toString(),
-//               text: comment.text,
-//               date: comment.date,
-//             }))
-//           : [],
-//       };
-//     })
-//   );
-
-//   client.close();
-
-//   return {
-//     props: {
-//       stories: storiesWithComments,
-//     },
-//   };
-// }

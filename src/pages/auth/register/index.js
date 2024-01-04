@@ -1,3 +1,4 @@
+import ErrorDetail from "@/components/ErrorDetail";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -8,6 +9,7 @@ const index = (props) => {
     email: "",
     password: "",
   });
+  const [error, setError] = useState(null);
 
   const registerUser = async (e) => {
     e.preventDefault();
@@ -19,9 +21,12 @@ const index = (props) => {
       body: JSON.stringify(data),
     });
 
-    const userInfo = await response.json();
-    if (userInfo) {
-      router.push("/signin");
+    // const userInfo = await response.json();
+    if (response.ok) {
+      router.push("/auth/signin");
+    } else {
+      const errorData = await response.json();
+      setError(errorData.message);
     }
   };
   return (
@@ -100,7 +105,7 @@ const index = (props) => {
                 />
               </div>
             </div>
-
+            {error && <ErrorDetail message={error} />}
             <div>
               <button
                 type="submit"

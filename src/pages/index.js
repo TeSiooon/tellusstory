@@ -50,17 +50,8 @@ export async function getServerSideProps() {
       };
     })
   );
-  // console.log(storiesWithComments[0]);
 
   client.close();
 
-  // return {
-  //   props: {
-  //     stories: sortedResults.map((story) => ({
-  //       id: story._id.toString(),
-  //       storyText: story.storyText,
-  //     })),
-  //   },
-  // };
   return { props: { storiesWithComments } };
 }

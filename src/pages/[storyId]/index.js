@@ -48,7 +48,9 @@ export async function getServerSideProps(context) {
         storyText: data.storyText,
       },
       comments: commentsData.map((comment) => ({
+        id: comment._id.toString(),
         commentText: comment.commentText,
+        user: comment.user,
       })),
     },
   };

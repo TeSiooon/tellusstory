@@ -45,6 +45,7 @@ export async function getServerSideProps() {
           ? commentsData.map((comment) => ({
               id: comment._id.toString(),
               text: comment.commentText,
+              // user: comment.user,
             }))
           : [],
       };

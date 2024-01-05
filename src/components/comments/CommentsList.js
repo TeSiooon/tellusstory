@@ -5,8 +5,8 @@ const CommentsList = (props) => {
       <ul>
         {props.comments.map((comment) => (
           <li key={comment.id}>
-            <p>Author</p>
-            {comment.text}
+            <p>{comment.user}</p>
+            {comment.commentText}
           </li>
         ))}
       </ul>

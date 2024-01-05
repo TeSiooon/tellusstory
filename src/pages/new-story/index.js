@@ -1,6 +1,9 @@
 import NewStory from "@/components/stories/NewStory";
+import { useRouter } from "next/navigation";
 
 const index = (props) => {
+  const router = useRouter();
+
   const addStoryHandler = async (enteredStoryData) => {
     const response = await fetch("/api/new-story", {
       method: "POST",
@@ -11,6 +14,10 @@ const index = (props) => {
     });
 
     const data = await response.json();
+
+    if (response.ok) {
+      router.push("/");
+    }
   };
 
   return <NewStory onAddStory={addStoryHandler} />;

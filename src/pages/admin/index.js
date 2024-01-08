@@ -2,7 +2,6 @@ import { useSession } from "next-auth/react";
 
 const index = (props) => {
   const { data: session } = useSession();
-  console.log(session);
 
   if (session?.user.role === "admin") {
     return <div>Welcome at admin page</div>;

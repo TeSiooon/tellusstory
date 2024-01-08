@@ -1,13 +1,18 @@
 import Link from "next/link";
 import styles from "./Navigation.module.css";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBookOpen } from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = (props) => {
   const { data: session, status } = useSession();
   // console.log(session);
   return (
     <nav className="flex h-2/6 px-8 border-b-4 border-[#E98074]">
-      <p className={`flex items-center w-40 text-black`}>TELL ME STORY</p>
+      <p className={`flex items-center w-60 text-black`}>
+        {/* <FontAwesomeIcon icon={faBookOpen} />  */}
+        <Link href="/">TELL US STORY</Link>
+      </p>
       <ul className="flex flex-row w-full items-center justify-end space-x-8">
         <li>
           <Link className={styles.menu__link} href="/">

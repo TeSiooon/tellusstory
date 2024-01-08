@@ -3,7 +3,6 @@ import Link from "next/link";
 import CommentsList from "../comments/CommentsList";
 
 const Story = (props) => {
-  // console.log(props);
   //   const displayedId = props.id.slice(-6);
   // console.log(displayedId);
   const { data: session, status } = useSession();

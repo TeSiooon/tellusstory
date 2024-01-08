@@ -4,8 +4,8 @@ import Story from "@/components/stories/Story";
 import { MongoClient, ObjectId } from "mongodb";
 
 const index = (props) => {
-  console.log("test komentarzy");
-  console.log(props.comments);
+  // console.log("test komentarzy");
+  // console.log(props.comments);
   return (
     <div className="flex flex-col w-2/4 justify-center items-center bg-orange-800 my-8">
       <div className="flex w-full bg-slate-600 px-8">
@@ -49,7 +49,7 @@ export async function getServerSideProps(context) {
       },
       comments: commentsData.map((comment) => ({
         id: comment._id.toString(),
-        commentText: comment.commentText,
+        text: comment.commentText,
         user: comment.user,
       })),
     },

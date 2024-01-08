@@ -1,8 +1,6 @@
 import Link from "next/link";
 import styles from "./Navigation.module.css";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBookOpen } from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = (props) => {
   const { data: session, status } = useSession();

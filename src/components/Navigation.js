@@ -7,7 +7,7 @@ const Navigation = (props) => {
   // console.log(session);
   return (
     <nav className="flex h-2/6 px-8 border-b-4 border-[#E98074]">
-      <p className={`flex items-center w-60 text-black`}>
+      <p className={`flex items-center w-60`}>
         {/* <FontAwesomeIcon icon={faBookOpen} />  */}
         <Link href="/">TELL US STORY</Link>
       </p>

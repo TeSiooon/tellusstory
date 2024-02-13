@@ -1,7 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 const TestNav = () => {
   const { data: session, status } = useSession();
 
@@ -65,15 +65,24 @@ const TestNav = () => {
         </div>
       </div>
       {/* Menu na małych ekranach (widoczne po kliknięciu) */}
-      {/* Naprawic animacje  */}
-      {isMenuOpen && (
-        <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: "auto", opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          className="md:hidden top-16 right-4 bg-gray-700 p-4"
-        >
-          <ul className="flex flex-col space-y-2">
+
+      <AnimatePresence mode="wait">
+        {isMenuOpen && (
+          <motion.ul
+            className="flex flex-col space-y-2 md:hidden top-16 right-4 bg-gray-700"
+            key="list"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{
+              height: "auto",
+              opacity: 1,
+              // transition: { ease: "easeIn", duration: 0.2 },
+            }}
+            exit={{
+              height: 0,
+              opacity: 0,
+              // transition: { ease: "easeOut", duration: 0.2 },
+            }}
+          >
             <li>
               <Link href="/">Main</Link>
             </li>
@@ -98,9 +107,9 @@ const TestNav = () => {
                 <Link href="/new-story">Dodaj</Link>
               </li>
             )}
-          </ul>
-        </motion.div>
-      )}
+          </motion.ul>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

@@ -26,11 +26,11 @@ const StoryDetail = (props) => {
           #{displayedId}
         </Link>
       </div>
-      <div className={classes.card_text}>
-        <p>{props.storyText}</p>
+      <div className={`${classes.card_text}`}>
+        <p className="p-3">{props.storyText}</p>
       </div>
 
-      <div className="w-full">
+      <div className="w-full px-2">
         Comments ({props.comments.length})
         <motion.button
           animate={{ rotate: commentsVisible ? 180 : 0 }}

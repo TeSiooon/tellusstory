@@ -29,21 +29,20 @@ const NewComment = (props) => {
     const data = await response.json();
   };
   return (
-    <div className="w-1/2 flex flex-col justify-center items-center">
+    <div className="w-1/2 flex flex-col justify-center items-center py-2">
       <p className="text-2xl my-2"></p>
       <form onSubmit={submitHandler} className="flex flex-col w-full">
         <div>
           <input
-            className="w-full"
+            className="w-full text-gray-900"
             type="text"
             required
-            // rows="15"
             id="comment"
             ref={commentTextRef}
           />
         </div>
-        <div className="relative">
-          <button className=" rounded-md bg-slate-500">Add comment</button>
+        <div className="relative py-2">
+          <button className=" rounded-md bg-slate-500 p-1">Add comment</button>
         </div>
       </form>
     </div>

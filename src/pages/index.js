@@ -37,7 +37,7 @@ export async function getServerSideProps() {
           storyId: story._id.toString(),
         })
         .toArray();
-      // console.log(`Comments for Story ${story._id}:`, commentsData);
+
       return {
         id: story._id.toString(),
         storyText: story.storyText,
@@ -45,7 +45,7 @@ export async function getServerSideProps() {
           ? commentsData.map((comment) => ({
               id: comment._id.toString(),
               text: comment.commentText,
-              // user: comment.user,
+              user: comment.user,
             }))
           : [],
       };
@@ -53,6 +53,7 @@ export async function getServerSideProps() {
   );
 
   client.close();
+  console.log(storiesWithComments.comments);
 
   return { props: { storiesWithComments } };
 }

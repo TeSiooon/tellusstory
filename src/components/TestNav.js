@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import classes from "./Navigation.module.css";
+import NavLink from "./navbar/NavLink";
 const TestNav = () => {
   const { data: session, status } = useSession();
 
@@ -19,9 +20,10 @@ const TestNav = () => {
 
         {/* Menu na dużych ekranach */}
         <ul className="hidden md:flex space-x-4">
-          <li>
-            <Link href={"/"}>Main</Link>
-          </li>
+          <ul>
+            <NavLink href={"/"}>Main</NavLink>
+          </ul>
+
           <li>
             <Link href="/">Poczekalnia</Link>
           </li>

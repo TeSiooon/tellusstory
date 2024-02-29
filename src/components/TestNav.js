@@ -2,6 +2,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import classes from "./Navigation.module.css";
 const TestNav = () => {
   const { data: session, status } = useSession();
 
@@ -10,7 +11,7 @@ const TestNav = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   return (
-    <nav className="bg-gray-800 p-4">
+    <nav className={`${classes.navbar} p-4`}>
       <div className="container mx-auto flex items-center justify-between">
         <div className="text-white font-bold text-xl">
           <Link href="/">TELL US STORY</Link>
@@ -69,7 +70,7 @@ const TestNav = () => {
       <AnimatePresence mode="wait">
         {isMenuOpen && (
           <motion.ul
-            className="flex flex-col space-y-2 md:hidden top-16 right-4 bg-gray-700"
+            className="flex flex-col space-y-2 md:hidden top-16 right-4 bg-gray-700 px-4"
             key="list"
             initial={{ height: 0, opacity: 0 }}
             animate={{
@@ -80,6 +81,7 @@ const TestNav = () => {
             exit={{
               height: 0,
               opacity: 0,
+
               // transition: { ease: "easeOut", duration: 0.2 },
             }}
           >

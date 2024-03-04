@@ -1,5 +1,5 @@
 const CommentsList = (props) => {
-  console.log(props.comments);
+  // console.log(props.comments);
   return (
     <div>
       <ul>

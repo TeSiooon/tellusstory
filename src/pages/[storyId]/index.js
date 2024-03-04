@@ -1,24 +1,30 @@
 import CommentsList from "@/components/comments/CommentsList";
-import NewComment from "@/components/comments/NewComment";
-import Story from "@/components/stories/Story";
+
 import { MongoClient, ObjectId } from "mongodb";
 
+import classes from "./StoryDetail.module.css";
+import NewComment from "@/components/comments/NewComment";
+import { useParams } from "next/navigation";
+
 const index = (props) => {
-  // console.log("test komentarzy");
-  // console.log(props.comments);
+  const params = useParams();
+  console.log(params.storyId);
   return (
-    <div className="flex flex-col w-2/4 justify-center items-center bg-orange-800 my-8">
-      <div className="flex w-full bg-slate-600 px-8">
+    <div
+      className={`${classes.card} flex flex-col w-2/4 justify-center items-center  my-8`}
+    >
+      <div className="flex w-full  px-8">
         <p className="w-1/2">Autor</p>
       </div>
-      <div className="bg-red-200">
-        <p>{props.story.storyText}</p>
+      <div className={`${classes.card_text} flex w-full`}>
+        <p className="p-3 ">{props.story.storyText}</p>
       </div>
 
-      <div className="w-full bg-green-200">
+      <div className="w-full ">
         Comments ({props.comments.length})
-        <div>
+        <div className="p-2 flex flex-col">
           <CommentsList comments={props.comments} />
+          <NewComment storyId={params.storyId} />
         </div>
       </div>
     </div>

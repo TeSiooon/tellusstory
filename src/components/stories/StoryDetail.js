@@ -21,13 +21,13 @@ const StoryDetail = (props) => {
       className={`${classes.card} flex flex-col justify-center items-center w-full my-8`}
     >
       <div className="flex w-full px-8">
-        <p className="w-1/2">Autor</p>
+        <p className="w-1/2 ">Autor</p>
         <Link href={`/${props.id}`} className="w-1/2 text-right">
           #{displayedId}
         </Link>
       </div>
-      <div className={`${classes.card_text}`}>
-        <p className="p-3">{props.storyText}</p>
+      <div className={`${classes.card_text} flex w-full`}>
+        <p className="p-3 w-full">{props.storyText}</p>
       </div>
 
       <div className="w-full px-2">

@@ -1,7 +1,10 @@
-import { useRef } from "react";
+import { useSession } from "next-auth/react";
+import { useRef, useState } from "react";
 
 const NewStory = (props) => {
   const storyTextInputRef = useRef();
+  const [errorMessage, setErrorMessage] = useState("");
+  const { data: session } = useSession();
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -9,34 +12,49 @@ const NewStory = (props) => {
     const storyText = storyTextInputRef.current.value;
     const today = new Date();
 
-    const storyData = {
-      storyText,
-      date: today,
-      comments: [],
-    };
+    if (storyText.trim() !== "") {
+      const storyData = {
+        storyText,
+        date: today,
+        comments: [],
+      };
 
-    props.onAddStory(storyData);
+      props.onAddStory(storyData);
+    } else {
+      setErrorMessage("Brak tresci historii");
+    }
   };
 
   return (
-    <div className="w-1/2 flex flex-col justify-center items-center">
-      <p className="text-2xl my-2">Share your story with us</p>
-      <form onSubmit={submitHandler} className="flex flex-col w-full">
-        <div>
-          <textarea
-            className="w-full"
-            type="text"
-            required
-            rows="15"
-            id="storyText"
-            ref={storyTextInputRef}
-          />
+    <>
+      {!session ? (
+        <p className="text-red-700 font-bold">
+          Musisz byc zalogowany aby dodac historie
+        </p>
+      ) : (
+        <div className="w-1/2 flex flex-col justify-center items-center">
+          <p className="text-2xl my-2">Share your story with us</p>
+          <form onSubmit={submitHandler} className="flex flex-col w-full">
+            <div>
+              <textarea
+                className="w-full text-gray-900"
+                type="text"
+                required
+                rows="15"
+                id="storyText"
+                ref={storyTextInputRef}
+              />
+            </div>
+            <div className="relative">
+              {errorMessage && (
+                <p className="text-red-700 font-bold">{errorMessage}</p>
+              )}
+              <button className="p-1 rounded-md bg-slate-500">Add story</button>
+            </div>
+          </form>
         </div>
-        <div className="relative">
-          <button className=" rounded-md bg-slate-500">Add story</button>
-        </div>
-      </form>
-    </div>
+      )}
+    </>
   );
 };
 

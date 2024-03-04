@@ -13,3 +13,7 @@ body {
   background: radial-gradient(#303b37, #1a1f1d);
   color: white;
 }
+
+input {
+  color: black;
+}

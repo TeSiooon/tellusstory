@@ -49,9 +49,9 @@ const NewComment = (props) => {
           <form onSubmit={submitHandler} className="flex flex-col w-full">
             <div>
               <input
-                className="w-full text-gray-900"
+                className="w-full"
                 type="text"
-                // required
+                required
                 id="comment"
                 ref={commentTextRef}
               />

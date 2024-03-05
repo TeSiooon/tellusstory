@@ -10,5 +10,10 @@ async function handler(req, res) {
     }
     const client = await MongoClient.connect(process.env.DATABASE_URL);
     const db = client.db("storiesDB");
+    const reportsCollection = db.collection("reports");
+
+    const report = await reportsCollection.insertOne(data);
+    client.close();
+    res.status(201).json({ message: "Reported" });
   }
 }

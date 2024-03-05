@@ -25,6 +25,7 @@ async function handler(req, res) {
       name,
       email,
       hashedPassword,
+      role: "user",
     });
     // console.log(result);
     client.close();

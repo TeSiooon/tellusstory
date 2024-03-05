@@ -6,6 +6,7 @@ import classes from "./Navigation.module.css";
 import NavLink from "./navbar/NavLink";
 const TestNav = () => {
   const { data: session, status } = useSession();
+  // console.log(session?.user);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
@@ -43,6 +44,11 @@ const TestNav = () => {
           {status === "authenticated" && (
             <li>
               <Link href="/new-story">Dodaj</Link>
+            </li>
+          )}
+          {session?.user.role === "admin" && (
+            <li>
+              <Link href="/admin">Panel </Link>
             </li>
           )}
         </ul>
@@ -109,6 +115,11 @@ const TestNav = () => {
             {status === "authenticated" && (
               <li>
                 <Link href="/new-story">Dodaj</Link>
+              </li>
+            )}
+            {session?.user.role === "admin" && (
+              <li>
+                <Link href="/admin">Panel </Link>
               </li>
             )}
           </motion.ul>

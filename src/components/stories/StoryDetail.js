@@ -5,6 +5,7 @@ import CommentsList from "../comments/CommentsList";
 import NewComment from "../comments/NewComment";
 import { AnimatePresence, motion } from "framer-motion";
 import classes from "./StoryDetail.module.css";
+import ReportButton from "../report/ReportButton";
 
 const StoryDetail = (props) => {
   const displayedId = props.id.slice(-6);
@@ -32,13 +33,22 @@ const StoryDetail = (props) => {
 
       <div className="w-full px-2">
         <NewComment storyId={props.id} />
-        Comments ({props.comments.length})
-        <motion.button
-          animate={{ rotate: commentsVisible ? 180 : 0 }}
-          onClick={toggleCommentsVisibility}
-        >
-          &#9650;
-        </motion.button>
+
+        <div className="flex">
+          <div className="flex w-1/2">
+            <p>Comments ({props.comments.length})</p>
+            <motion.button
+              animate={{ rotate: commentsVisible ? 180 : 0 }}
+              onClick={toggleCommentsVisibility}
+            >
+              &#9650;
+            </motion.button>
+          </div>
+          <div className="w-1/2 text-right">
+            <ReportButton storyId={props.id} />
+          </div>
+        </div>
+
         <AnimatePresence>
           {commentsVisible && (
             <motion.div

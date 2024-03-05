@@ -53,7 +53,7 @@ export async function getServerSideProps() {
   );
 
   client.close();
-  console.log(storiesWithComments.comments);
+  // console.log(storiesWithComments.comments);
 
   return { props: { storiesWithComments } };
 }

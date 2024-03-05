@@ -8,7 +8,7 @@ import { useParams } from "next/navigation";
 
 const index = (props) => {
   const params = useParams();
-  console.log(params.storyId);
+  // console.log(params.storyId);
   return (
     <div
       className={`${classes.card} flex flex-col w-2/4 justify-center items-center  my-8`}

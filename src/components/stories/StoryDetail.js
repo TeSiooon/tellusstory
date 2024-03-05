@@ -31,6 +31,7 @@ const StoryDetail = (props) => {
       </div>
 
       <div className="w-full px-2">
+        <NewComment storyId={props.id} />
         Comments ({props.comments.length})
         <motion.button
           animate={{ rotate: commentsVisible ? 180 : 0 }}
@@ -46,13 +47,13 @@ const StoryDetail = (props) => {
               exit={{ height: 0, opacity: 0 }}
             >
               <CommentsList comments={props.comments} />
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
                 <NewComment storyId={props.id} />
-              </motion.div>
+              </motion.div> */}
             </motion.div>
           )}
         </AnimatePresence>

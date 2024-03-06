@@ -45,7 +45,6 @@ const ReportedList = ({ reports }) => {
 
             <div className="flex gap-5">
               <DeleteReportsButton storyId={storyId} />
-              <p>Ignoruj</p>
             </div>
           </li>
         ))}

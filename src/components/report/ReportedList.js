@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 import ShowReports from "./ShowReports";
 import DeleteReportsButton from "./DeleteReportsButton";
+import DeleteStoryButton from "./DeleteStoryButton";
 
 const ReportedList = ({ reports }) => {
   const [reportsCount, setReportsCount] = useState({});
@@ -45,6 +46,7 @@ const ReportedList = ({ reports }) => {
 
             <div className="flex gap-5">
               <DeleteReportsButton storyId={storyId} />
+              <DeleteStoryButton storyId={storyId} />
             </div>
           </li>
         ))}

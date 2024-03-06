@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import DeleteButton from "./DeleteButton";
+
 import ShowReports from "./ShowReports";
+import DeleteReportsButton from "./DeleteReportsButton";
 
 const ReportedList = ({ reports }) => {
   const [reportsCount, setReportsCount] = useState({});
@@ -37,15 +38,14 @@ const ReportedList = ({ reports }) => {
               ({reportsCount[storyId]} zgłoszeń)
             </span>
             {/* Actions */}
-            <div>
-              <ShowReports
-                reports={reports.filter((report) => report.storyId === storyId)}
-              />
-            </div>
+
+            <ShowReports
+              reports={reports.filter((report) => report.storyId === storyId)}
+            />
+
             <div className="flex gap-5">
-              {" "}
-              <DeleteButton storyId={storyId} />
-              <p className=" bg-red-500">Ignoruj</p>
+              <DeleteReportsButton storyId={storyId} />
+              <p>Ignoruj</p>
             </div>
           </li>
         ))}

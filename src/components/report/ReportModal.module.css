@@ -3,10 +3,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 75%; /* 3/4 szerokości ekranu */
+  width: 75%;
   height: 75%;
-  max-width: 80%; /* maksymalna szerokość modalu */
-  background-color: rgb(37, 138, 201);
+  max-width: 80%;
+  background: linear-gradient(180deg, #307e6c, #2b996d);
   color: black;
 }
 

@@ -75,7 +75,7 @@ const ReportModal = ({ isOpen, onClose, storyId }) => {
           onClick={handleCloseAndSendHadler}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          disabled={sending}
+          disabled={sending || sent}
         >
           {sending ? "Wysyłanie..." : sent ? "Wysłano" : "Zgłoś"}
         </motion.button>

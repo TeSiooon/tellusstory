@@ -5,6 +5,8 @@ import ShowReports from "./ShowReports";
 import DeleteReportsButton from "./DeleteReportsButton";
 import DeleteStoryButton from "./DeleteStoryButton";
 
+import classes from "./ReportedList.module.css";
+
 const ReportedList = ({ reports }) => {
   const [reportsCount, setReportsCount] = useState({});
 
@@ -24,29 +26,25 @@ const ReportedList = ({ reports }) => {
         {Object.keys(reportsCount).map((storyId) => (
           <li
             key={storyId}
-            className={`p-3 bg-emerald-200 ${
-              reportsCount[storyId] <= 2
-                ? "text-gray-500"
-                : reportsCount[storyId] <= 5
-                ? "text-red-500"
-                : "text-red-800"
+            className={`p-3 text-gray-950 bg-white flex ${
+              reportsCount[storyId] >= 6 ? classes.important : classes.mid
             }`}
           >
-            <Link href={`/${storyId}`} target="_blank">
-              Pokaz historie &#8599;
-            </Link>
-            <span className="ml-2 text-sm">
-              ({reportsCount[storyId]} zgłoszeń)
-            </span>
-            {/* Actions */}
-
-            <ShowReports
-              reports={reports.filter((report) => report.storyId === storyId)}
-            />
-
-            <div className="flex gap-5">
-              <DeleteReportsButton storyId={storyId} />
-              <DeleteStoryButton storyId={storyId} />
+            <div>
+              <Link href={`/${storyId}`} target="_blank">
+                Pokaz historie &#8599;
+              </Link>
+              <span className="ml-2 text-sm">
+                ({reportsCount[storyId]} zgłoszeń)
+              </span>
+              {/* Actions */}
+              <ShowReports
+                reports={reports.filter((report) => report.storyId === storyId)}
+              />
+              <div className="flex gap-5">
+                <DeleteReportsButton storyId={storyId} />
+                <DeleteStoryButton storyId={storyId} />
+              </div>
             </div>
           </li>
         ))}

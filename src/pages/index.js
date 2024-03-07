@@ -1,8 +1,9 @@
 import { Inter } from "next/font/google";
 import Head from "next/head";
-import { Fragment } from "react";
+import { Fragment, Suspense } from "react";
 import StoriesList from "@/components/stories/StoriesList";
 import { MongoClient } from "mongodb";
+import StoriesLoading from "@/components/stories/StoriesLoading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,7 +15,9 @@ export default function Home(props) {
         <title>Tell Us Story</title>
         <meta name="TUS" description="Browse stories around the world" />
       </Head>
-      <StoriesList stories={props.storiesWithComments} />
+      <Suspense fallback={<StoriesLoading />}>
+        <StoriesList stories={props.storiesWithComments} />
+      </Suspense>
     </Fragment>
   );
 }

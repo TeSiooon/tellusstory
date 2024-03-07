@@ -17,6 +17,7 @@ const ReportedList = ({ reports }) => {
     });
 
     setReportsCount(countMap);
+    // console.log(countMap);
   }, [reports]);
 
   return (
@@ -27,7 +28,11 @@ const ReportedList = ({ reports }) => {
           <li
             key={storyId}
             className={`p-3 text-gray-950 bg-white flex ${
-              reportsCount[storyId] >= 6 ? classes.important : classes.mid
+              reportsCount[storyId] >= 6
+                ? classes.important
+                : reportsCount[storyId] > 3
+                ? classes.mid
+                : classes.low
             }`}
           >
             <div>

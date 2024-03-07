@@ -1,16 +1,22 @@
 import ReactModal from "react-modal";
 import classes from "./ReportModal.module.css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import ErrorDisplay from "../error/ErrorDisplay";
+import ErrorDetail from "../ErrorDetail";
 
 const ReportModal = ({ isOpen, onClose, storyId }) => {
+  const [error, setError] = useState("");
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+
   const reportRef = useRef();
+
   const handleCloseAndSendHadler = async () => {
-    // console.log("wyslano");
-    // console.log(storyId);
-    // console.log(reportRef.current.value);
+    setSending(true);
     const reportText = reportRef.current.value;
     if (reportText.trim() !== "") {
+      setError("");
       const reportData = {
         storyId,
         reportText,
@@ -23,13 +29,26 @@ const ReportModal = ({ isOpen, onClose, storyId }) => {
         },
       });
       if (response.ok) {
-        onClose();
+        setSent(true);
+        setTimeout(() => {
+          onClose();
+          setSent(false);
+        }, 3500);
+        // onClose();
       } else {
+        setError("Server error occurred");
         console.log("wrong");
       }
+    } else {
+      setError("Report must contain text");
     }
-    console.log("brak");
+    setSending(false);
   };
+
+  const handleChange = () => {
+    setError("");
+  };
+
   return (
     <ReactModal
       isOpen={isOpen}
@@ -47,16 +66,21 @@ const ReportModal = ({ isOpen, onClose, storyId }) => {
           required
           ref={reportRef}
           name="reportText"
+          onChange={handleChange}
         ></textarea>
         <motion.button
-          className="bg-white w-1/6 text-black rounded-full drop-shadow-lg px-4 py-2 transition duration-300 ease-in-out transform hover:bg-red-600 hover:shadow-lg"
+          className={`${sending && "w-auto"} ${
+            sent && "bg-green-500"
+          } bg-white text-black rounded-full drop-shadow-lg px-4 py-2 transition duration-300 ease-in-out transform hover:bg-red-600 hover:shadow-lg`}
           onClick={handleCloseAndSendHadler}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
+          disabled={sending}
         >
-          Zglos
+          {sending ? "Wysyłanie..." : sent ? "Wysłano" : "Zgłoś"}
         </motion.button>
       </div>
+      {error ? <ErrorDisplay errorText={error} /> : null}
     </ReactModal>
   );
 };

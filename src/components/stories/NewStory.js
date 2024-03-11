@@ -33,12 +33,12 @@ const NewStory = (props) => {
           Musisz byc zalogowany aby dodac historie
         </p>
       ) : (
-        <div className="w-1/2 flex flex-col justify-center items-center mt-10">
+        <div className="w-1/2 flex flex-col justify-center items-center mt-10 max-sm:w-3/4">
           <p className="text-2xl my-2">Share your story with us</p>
           <form onSubmit={submitHandler} className="flex flex-col w-full">
             <div>
               <textarea
-                className="w-full max-h-50 min-h-10 resize-y overflow-auto border border-gray-300 rounded-md p-2 my-5"
+                className="w-full max-h-50 min-h-10 resize-y overflow-auto border border-gray-300 rounded-md p-2 my-5 text-black"
                 type="text"
                 required
                 rows="15"

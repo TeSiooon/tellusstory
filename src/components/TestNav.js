@@ -21,13 +21,13 @@ const TestNav = () => {
 
         {/* Menu na dużych ekranach */}
         <ul className="hidden md:flex space-x-4">
-          <ul>
-            <NavLink href={"/"}>Main</NavLink>
-          </ul>
-
           <li>
-            <Link href="/">Poczekalnia</Link>
+            <NavLink href={"/"}>Main</NavLink>
           </li>
+
+          {/* <li>
+            <Link href="/">Poczekalnia</Link>
+          </li> */}
           <li>
             {status === "unauthenticated" && (
               <button onClick={signIn}>Login</button>
@@ -43,12 +43,12 @@ const TestNav = () => {
           </li>
           {status === "authenticated" && (
             <li>
-              <Link href="/new-story">Dodaj</Link>
+              <NavLink href={"/new-story"}>Dodaj</NavLink>
             </li>
           )}
           {session?.user.role === "admin" && (
             <li>
-              <Link href="/admin">Panel </Link>
+              <NavLink href={"/admin"}>Panel </NavLink>
             </li>
           )}
         </ul>
@@ -78,7 +78,7 @@ const TestNav = () => {
       <AnimatePresence mode="wait">
         {isMenuOpen && (
           <motion.ul
-            className="flex flex-col space-y-2 md:hidden top-16 right-4 bg-gray-700 px-4"
+            className="flex flex-col space-y-2 md:hidden mx-5 my-2 "
             key="list"
             initial={{ height: 0, opacity: 0 }}
             animate={{
@@ -94,11 +94,9 @@ const TestNav = () => {
             }}
           >
             <li>
-              <Link href="/">Main</Link>
+              <NavLink href={"/"}>Main</NavLink>
             </li>
-            <li>
-              <Link href="/">Poczekalnia</Link>
-            </li>
+
             <li>
               {status === "unauthenticated" && (
                 <button onClick={signIn}>Login</button>
@@ -114,12 +112,12 @@ const TestNav = () => {
             </li>
             {status === "authenticated" && (
               <li>
-                <Link href="/new-story">Dodaj</Link>
+                <NavLink href={"/new-story"}>Dodaj</NavLink>
               </li>
             )}
             {session?.user.role === "admin" && (
               <li>
-                <Link href="/admin">Panel </Link>
+                <NavLink href={"/admin"}>Panel </NavLink>
               </li>
             )}
           </motion.ul>

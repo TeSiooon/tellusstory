@@ -18,9 +18,7 @@ const StoryDetail = (props) => {
     setCommentsVisible((prev) => !prev);
   };
   return (
-    <div
-      className={`${classes.card} flex flex-col justify-center items-center w-full my-8`}
-    >
+    <div className={`${classes.card} flex flex-col w-full my-8 `}>
       <div className="flex w-full px-8">
         <p className="w-1/2 ">Autor</p>
         <Link href={`/${props.id}`} className="w-1/2 text-right">
@@ -35,7 +33,7 @@ const StoryDetail = (props) => {
         <NewComment storyId={props.id} />
 
         <div className="flex">
-          <div className="flex w-1/2">
+          <div className="flex w-1/2 ">
             <p>Comments ({props.comments.length})</p>
             <motion.button
               animate={{ rotate: commentsVisible ? 180 : 0 }}
@@ -57,13 +55,6 @@ const StoryDetail = (props) => {
               exit={{ height: 0, opacity: 0 }}
             >
               <CommentsList comments={props.comments} />
-              {/* <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-              >
-                <NewComment storyId={props.id} />
-              </motion.div> */}
             </motion.div>
           )}
         </AnimatePresence>

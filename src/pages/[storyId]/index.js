@@ -11,7 +11,7 @@ const index = (props) => {
   // console.log(params.storyId);
   return (
     <div
-      className={`${classes.card} flex flex-col w-2/4 justify-center items-center  my-8`}
+      className={`${classes.card} flex flex-col w-2/4 justify-center items-center  my-8 max-sm:w-3/4`}
     >
       <div className="flex w-full  px-8">
         <p className="w-1/2">Autor</p>
@@ -20,9 +20,9 @@ const index = (props) => {
         <p className="p-3 ">{props.story.storyText}</p>
       </div>
 
-      <div className="w-full ">
+      <div className="w-full p-2">
         Comments ({props.comments.length})
-        <div className="p-2 flex flex-col">
+        <div className=" flex flex-col">
           <CommentsList comments={props.comments} />
           <NewComment storyId={params.storyId} />
         </div>

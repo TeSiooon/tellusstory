@@ -15,9 +15,9 @@ export default function Home(props) {
         <title>Tell Us Story</title>
         <meta name="TUS" description="Browse stories around the world" />
       </Head>
-      <Suspense fallback={<StoriesLoading />}>
-        <StoriesList stories={props.storiesWithComments} />
-      </Suspense>
+      {/* <Suspense fallback={<StoriesLoading />}> */}
+      <StoriesList stories={props.storiesWithComments} />
+      {/* </Suspense> */}
     </Fragment>
   );
 }

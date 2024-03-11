@@ -48,6 +48,10 @@ const ReportModal = ({ isOpen, onClose, storyId }) => {
   const handleChange = () => {
     setError("");
   };
+  const handleClose = () => {
+    setError("");
+    onClose();
+  };
 
   return (
     <ReactModal
@@ -68,17 +72,27 @@ const ReportModal = ({ isOpen, onClose, storyId }) => {
           name="reportText"
           onChange={handleChange}
         ></textarea>
-        <motion.button
-          className={`${sending && "w-auto"} ${
-            sent && "bg-green-500"
-          } bg-white text-black rounded-full drop-shadow-lg px-4 py-2 transition duration-300 ease-in-out transform hover:bg-red-600 hover:shadow-lg`}
-          onClick={handleCloseAndSendHadler}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          disabled={sending || sent}
-        >
-          {sending ? "Wysyłanie..." : sent ? "Wysłano" : "Zgłoś"}
-        </motion.button>
+        <div className="flex items-center justify-between">
+          {/* Actions */}{" "}
+          <motion.button
+            className={`${sending && "w-1/2"} ${
+              sent && "bg-green-500"
+            } bg-white text-black rounded-full drop-shadow-lg px-4 py-2 transition duration-300 ease-in-out transform hover:bg-red-600 hover:shadow-lg`}
+            onClick={handleCloseAndSendHadler}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            disabled={sending || sent}
+          >
+            {sending ? "Wysyłanie..." : sent ? "Wysłano" : "Zgłoś"}
+          </motion.button>
+          <button
+            type="button"
+            onClick={handleClose}
+            className="bg-white text-black rounded-full drop-shadow-lg px-4 py-2"
+          >
+            X
+          </button>
+        </div>
       </div>
       {error ? <ErrorDisplay errorText={error} /> : null}
     </ReactModal>

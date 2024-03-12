@@ -46,7 +46,7 @@ const ReportedList = ({ reports }) => {
               <ShowReports
                 reports={reports.filter((report) => report.storyId === storyId)}
               />
-              <div className="flex gap-5">
+              <div className="flex gap-5 mt-7">
                 <DeleteReportsButton storyId={storyId} />
                 <DeleteStoryButton storyId={storyId} />
               </div>

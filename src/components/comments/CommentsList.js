@@ -2,6 +2,7 @@ const CommentsList = (props) => {
   // console.log(props.comments);
   return (
     <div>
+      {props.comments.length === 0 && <p>Brak komentarzy</p>}
       <ul>
         {props.comments.map((comment) => (
           <li key={comment.id} className="pt-2">

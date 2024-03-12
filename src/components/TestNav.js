@@ -14,7 +14,7 @@ const TestNav = () => {
   };
   return (
     <nav className={`${classes.navbar} p-4`}>
-      <div className="container mx-auto flex items-center justify-between">
+      <div className="container mx-auto flex items-center justify-between max-md:my-2">
         <div className="text-white font-bold text-xl">
           <Link href="/">TELL US STORY</Link>
         </div>
@@ -78,7 +78,7 @@ const TestNav = () => {
       <AnimatePresence mode="wait">
         {isMenuOpen && (
           <motion.ul
-            className="flex flex-col space-y-2 md:hidden mx-5 my-2 "
+            className="flex flex-col space-y-2 md:hidden mx-5  "
             key="list"
             initial={{ height: 0, opacity: 0 }}
             animate={{

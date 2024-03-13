@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import xss from "xss";
 
 require("dotenv").config();
 
@@ -6,6 +7,8 @@ async function handler(req, res) {
   if (req.method === "POST") {
     try {
       const data = req.body;
+      data.storyText = xss(data.storyText);
+      console.log(data);
       if (!data.storyText || data.storyText.trim() === "") {
         return res.status(400).json({ message: "Story text is required" });
       }

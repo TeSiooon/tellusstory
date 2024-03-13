@@ -1,3 +1,5 @@
+import xss from "xss";
+
 const { MongoClient } = require("mongodb");
 
 require("dotenv").config();
@@ -5,6 +7,8 @@ require("dotenv").config();
 async function handler(req, res) {
   if (req.method === "POST") {
     const data = req.body;
+    data.reportText = xss(data.reportText);
+
     if (!data.reportText || data.reportText.trim() === "") {
       return res.status(400).json({ message: "Report text is required" });
     }

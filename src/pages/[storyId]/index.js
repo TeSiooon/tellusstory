@@ -4,10 +4,9 @@ import { MongoClient, ObjectId } from "mongodb";
 
 import classes from "./StoryDetail.module.css";
 import NewComment from "@/components/comments/NewComment";
-import { useParams } from "next/navigation";
 
 const index = (props) => {
-  const params = useParams();
+  console.log(props);
 
   if (!props.story) {
     return <h1 className="">Brak historii o podanym ID</h1>;
@@ -28,7 +27,7 @@ const index = (props) => {
           Comments ({props.comments.length})
           <div className=" flex flex-col">
             <CommentsList comments={props.comments} />
-            <NewComment storyId={params.storyId} />
+            <NewComment storyId={props.storyId} />
           </div>
         </div>
       </div>
@@ -64,6 +63,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       story: {
+        id: storyId,
         authorName: data.authorName,
         storyText: data.storyText,
       },

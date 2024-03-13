@@ -1,7 +1,7 @@
 import NewStory from "@/components/stories/NewStory";
 import { useRouter } from "next/navigation";
 
-const index = (props) => {
+const Index = (props) => {
   const router = useRouter();
 
   const addStoryHandler = async (enteredStoryData) => {
@@ -23,4 +23,4 @@ const index = (props) => {
   return <NewStory onAddStory={addStoryHandler} />;
 };
 
-export default index;
+export default Index;

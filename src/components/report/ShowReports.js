@@ -29,7 +29,7 @@ const ShowReportsButton = ({ reports }) => {
             <h3>Zgłoszenia:</h3>
             <ul>
               {reports.map((report) => (
-                <li key={report._id}>"{report.reportText}"</li>
+                <li key={report._id}>&quot;{report.reportText}&quot;</li>
               ))}
             </ul>
           </motion.div>

@@ -1,13 +1,16 @@
 import { useState } from "react";
 import ReportModal from "./ReportModal";
+import { useRouter } from "next/navigation";
 
 const DeleteStoryButton = ({ storyId }) => {
+  const router = useRouter();
   const deleteStoryHandler = async () => {
     const res = await fetch(`/api/deletestory?storyId=${storyId}`, {
       method: "DELETE",
     });
     if (res.ok) {
       console.log("usunieto historie i jej zgloszenia");
+      router.push("admin");
     }
   };
   return (

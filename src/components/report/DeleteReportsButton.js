@@ -1,13 +1,15 @@
-import { useState } from "react";
-import ReportModal from "./ReportModal";
+import { redirect, useRouter } from "next/navigation";
 
 const DeleteReportsButton = ({ storyId }) => {
+  const router = useRouter();
   const deleteReportsHandler = async () => {
     const res = await fetch(`/api/deletereports?storyId=${storyId}`, {
       method: "DELETE",
     });
     if (res.ok) {
       console.log("usunieto zgloszenia");
+      // redirect("/admin");
+      router.push("admin");
     }
   };
   return (

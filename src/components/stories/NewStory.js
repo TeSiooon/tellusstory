@@ -15,6 +15,7 @@ const NewStory = (props) => {
 
     if (storyText.trim() !== "") {
       const storyData = {
+        authorName: session.user.name,
         storyText,
         date: today,
         comments: [],

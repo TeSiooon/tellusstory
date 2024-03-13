@@ -8,26 +8,31 @@ import { useParams } from "next/navigation";
 
 const index = (props) => {
   const params = useParams();
-  // console.log(params.storyId);
-  return (
-    <div
-      className={`${classes.card} flex flex-col w-2/4 justify-center items-center  my-8 max-sm:w-3/4`}
-    >
-      <div className="flex w-full  px-8">
-        <p className="w-1/2">Autor</p>
-      </div>
-      <div className={`${classes.card_text} flex w-full`}>
-        <p className="p-3 ">{props.story.storyText}</p>
-      </div>
 
-      <div className="w-full p-2">
-        Comments ({props.comments.length})
-        <div className=" flex flex-col">
-          <CommentsList comments={props.comments} />
-          <NewComment storyId={params.storyId} />
+  if (!props.story) {
+    return <h1 className="">Brak historii o podanym ID</h1>;
+  }
+  return (
+    <>
+      <div
+        className={`${classes.card} flex flex-col w-2/4 justify-center items-center  my-8 max-sm:w-3/4`}
+      >
+        <div className="flex w-full px-2">
+          <p className="w-1/2">{props.story.authorName}</p>
+        </div>
+        <div className={`${classes.card_text} flex w-full`}>
+          <p className="p-3 ">{props.story.storyText}</p>
+        </div>
+
+        <div className="w-full p-2">
+          Comments ({props.comments.length})
+          <div className=" flex flex-col">
+            <CommentsList comments={props.comments} />
+            <NewComment storyId={params.storyId} />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -40,6 +45,14 @@ export async function getServerSideProps(context) {
   const db = client.db("storiesDB");
   const storiesCollection = db.collection("stories");
   const data = await storiesCollection.findOne({ _id: new ObjectId(storyId) });
+  if (!data) {
+    return {
+      props: {
+        story: null,
+        comments: [],
+      },
+    };
+  }
   //comments
   const commentsCollection = db.collection("comments");
   const commentsData = await commentsCollection
@@ -51,6 +64,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       story: {
+        authorName: data.authorName,
         storyText: data.storyText,
       },
       comments: commentsData.map((comment) => ({

@@ -12,15 +12,14 @@ const StoryDetail = (props) => {
   // console.log(displayedId);
   const { data: session, status } = useSession();
   const [commentsVisible, setCommentsVisible] = useState(false);
-  // console.log(props);
 
   const toggleCommentsVisibility = () => {
     setCommentsVisible((prev) => !prev);
   };
   return (
     <div className={`${classes.card} flex flex-col w-full my-8 `}>
-      <div className="flex w-full px-8">
-        <p className="w-1/2 ">Autor</p>
+      <div className="flex w-full px-3">
+        <p className="w-1/2 ">{props.authorName}</p>
         <Link href={`/${props.id}`} className="w-1/2 text-right">
           #{displayedId}
         </Link>

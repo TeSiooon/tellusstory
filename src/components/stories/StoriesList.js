@@ -10,6 +10,7 @@ const StoriesList = (props) => {
             storyText={story.storyText}
             id={story.id}
             comments={story.comments}
+            authorName={story.authorName}
           />
         ))}
       </ul>

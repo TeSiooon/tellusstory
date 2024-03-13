@@ -44,6 +44,7 @@ export async function getServerSideProps() {
       return {
         id: story._id.toString(),
         storyText: story.storyText,
+        authorName: story.authorName,
         comments: commentsData
           ? commentsData.map((comment) => ({
               id: comment._id.toString(),

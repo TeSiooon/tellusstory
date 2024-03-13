@@ -1,14 +1,9 @@
 import { useSession } from "next-auth/react";
 
-const CheckRole = () => {
+const CheckRole = ({ children }) => {
   const { data: session } = useSession();
-  if (session?.user.role !== "admin") {
-    return (
-      <>
-        <p>You are not authorized to view this page</p>
-      </>
-    );
-  }
+  const isAdmin = session?.user.role === "admin";
+  return <>{isAdmin ? children : <p>You are not authorized</p>}</>;
 };
 
 export default CheckRole;

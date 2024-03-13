@@ -1,19 +1,13 @@
 import ReportedList from "@/components/report/ReportedList";
-import { useSession } from "next-auth/react";
+
 import { MongoClient } from "mongodb";
 import CheckRole from "@/components/admin/CheckRole";
 
 const index = (props) => {
-  const { data: session } = useSession();
-
-  if (session?.user.role !== "admin") {
-    return <CheckRole />;
-  }
   return (
-    <>
-      {/* Dodac liste zgloszonych postow po kolorze */}
+    <CheckRole>
       <ReportedList reports={props.reports} />
-    </>
+    </CheckRole>
   );
 };
 

@@ -1,16 +1,13 @@
 import ReportedList from "@/components/report/ReportedList";
 import { useSession } from "next-auth/react";
 import { MongoClient } from "mongodb";
+import CheckRole from "@/components/admin/CheckRole";
 
 const index = (props) => {
   const { data: session } = useSession();
 
   if (session?.user.role !== "admin") {
-    return (
-      <>
-        <p>You are not authorized to view this page</p>
-      </>
-    );
+    return <CheckRole />;
   }
   return (
     <>

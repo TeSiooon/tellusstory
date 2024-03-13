@@ -6,7 +6,7 @@ import classes from "./StoryDetail.module.css";
 import NewComment from "@/components/comments/NewComment";
 
 const index = (props) => {
-  console.log(props);
+  // console.log(props);
 
   if (!props.story) {
     return <h1 className="">Brak historii o podanym ID</h1>;

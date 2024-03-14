@@ -1,5 +1,4 @@
 import ReportedList from "@/components/report/ReportedList";
-
 import { MongoClient } from "mongodb";
 import CheckRole from "@/components/admin/CheckRole";
 

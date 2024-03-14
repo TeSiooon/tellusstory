@@ -1,4 +1,3 @@
-import ErrorDetail from "@/components/ErrorDetail";
 import RegisterForm from "@/components/register/RegisterForm";
 
 const index = (props) => {

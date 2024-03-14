@@ -1,52 +1,33 @@
+import ErrorDetail from "@/components/ErrorDetail";
+import { signIn } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import ErrorDetail from "../ErrorDetail";
 
-const RegisterForm = () => {
+const LoginForm = () => {
   const router = useRouter();
   const [data, setData] = useState({
-    name: "",
     email: "",
     password: "",
   });
   const [error, setError] = useState(null);
 
-  const registerUser = async (e) => {
+  const loginUserHandler = async (e) => {
     e.preventDefault();
-    const response = await fetch("/api/user/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
+
+    const response = await signIn("credentials", {
+      ...data,
+      redirect: false,
     });
 
     if (response.ok) {
-      router.push("/auth/signin");
+      router.push("/");
     } else {
-      const errorData = await response.json();
-      setError(errorData.message);
+      setError(response.error);
     }
   };
   return (
-    <form className="space-y-6" onSubmit={registerUser}>
-      <div>
-        <label htmlFor="name" className="block text-sm font-medium leading-6 ">
-          Name
-        </label>
-        <div className="mt-2">
-          <input
-            value={data.name}
-            onChange={(e) => setData({ ...data, name: e.target.value })}
-            id="name"
-            name="name"
-            type="text"
-            // autoComplete="name"
-            required
-            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-          />
-        </div>
-      </div>
+    <form className="space-y-6" onSubmit={loginUserHandler}>
       <div>
         <label htmlFor="email" className="block text-sm font-medium leading-6 ">
           Email address
@@ -60,7 +41,9 @@ const RegisterForm = () => {
             type="email"
             autoComplete="email"
             required
-            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className={`block w-full rounded-md border-0 py-1.5 text-gray-900  shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
+              error ? "ring-red-500" : "ring-gray-300"
+            }`}
           />
         </div>
       </div>
@@ -83,21 +66,31 @@ const RegisterForm = () => {
             type="password"
             autoComplete="current-password"
             required
-            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
+              error ? "ring-red-500" : "ring-gray-300"
+            }`}
           />
         </div>
       </div>
-      {error && <ErrorDetail message={error} />}
+
       <div>
+        <ErrorDetail message={error} />
         <button
           type="submit"
           className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
-          Register
+          Login
         </button>
+      </div>
+      <div>
+        <Link href="register">
+          <button className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            Register
+          </button>
+        </Link>
       </div>
     </form>
   );
 };
 
-export default RegisterForm;
+export default LoginForm;
